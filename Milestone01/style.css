@@ -1,0 +1,264 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+body {
+  background-color: #3b3a3a;
+  color: #84f1ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.resume-container {
+  width: 90%;
+  max-width: 600px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #84f1ff;
+}
+
+/* Flex layout for image on the right and text on the left */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse; /* Image on the right */
+  margin-bottom: 20px;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #84f1ff;
+}
+
+.header h1 {
+  color: #84f1ff;
+  text-align: left;
+  margin: 0;
+}
+
+.header h2 {
+  color: #ffeb7c;
+  text-align: left;
+  margin-top: 120px; /* Adjust margin to position h2 correctly below h1 */
+}
+
+/* Section Styles */
+h3 {
+  color: #ffeb7c;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.about, .education, .skills {
+  margin-bottom: 20px;
+}
+
+.about p, .education ul, .skills ul {
+  font-size: 1em;
+  color: #84f1ff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #84f1ff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Education Box Styling */
+.education-box {
+  background-color: #222;
+  color: #84f1ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #84f1ff;
+}
+
+.education-box p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Skills Progress Bar Styling */
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill span {
+  color: #84f1ff;
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.progress-bar {
+  background-color: #444;
+  height: 8px;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 5px;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #84f1ff;
+}
+
+/* Hobbies Section */
+.hobbies-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hobby {
+  background-color: #111;
+  color: #84f1ff;
+  padding: 10px 20px;
+  border: 2px solid #84f1ff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #84f1ff;
+  transition: all 0.3s;
+}
+
+.hobby:hover {
+  background-color: #84f1ff;
+  color: #000;
+  box-shadow: 0 0 20px #84f1ff, 0 0 30px #84f1ff;
+}
+
+/* Social Section */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon {
+  color: #84f1ff;
+  font-size: 24px;
+  text-decoration: none;
+  padding: 10px;
+  border: 2px solid #84f1ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 0 10px #84f1ff;
+  transition: all 0.3s;
+}
+
+.icon:hover {
+  background-color: #84f1ff;
+  color: #000;
+  box-shadow: 0 0 20px #84f1ff, 0 0 30px #84f1ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .resume-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .header {
+    flex-direction: column; /* Stacks image and text vertically on small screens */
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-picture img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+  }
+
+  .header h1, .header h2 {
+    text-align: center;
+  }
+
+  h1, h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+  button {
+    padding: 8px;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-picture img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h1, h2 {
+    font-size: 1.2em;
+  }
+
+  h3 {
+    font-size: 1em;
+  }
+
+  .social-icons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+}

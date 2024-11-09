@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generated Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #b3f0ff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .resume-container {
+      background-color: #222;
+      border: 2px solid #00e6e6;
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffcc00;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00e6e6;
+    }
+
+    h3 {
+      color: #00e6e6;
+      margin-top: 20px;
+      font-size: 1.2em;
+      border-bottom: 2px solid #00e6e6;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .profile-picture img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #00e6e6;
+    }
+
+    .resume-container section {
+      margin-bottom: 15px;
+    }
+
+    .resume-container p {
+      font-size: 1em;
+      line-height: 1.4em;
+      margin: 5px 0;
+    }
+
+    .skills div {
+      margin-bottom: 8px;
+    }
+
+    .skills span {
+      background-color: #00e6e6;
+      color: #222;
+      padding: 5px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="resume-container" id="resume-display">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="profile-picture">
+        <img src="" alt="Profile Picture" id="display-image">
+      </div>
+      <h1 id="display-name">Full Name</h1>
+      <h2 id="display-job-title">Job Title</h2>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <h3>About Me</h3>
+      <p id="display-about">This is a placeholder for the about text. It will be dynamically replaced.</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+      <h3>Education</h3>
+      <p id="display-degree">Degree</p>
+      <p id="display-institution">Institution</p>
+      <p id="display-year">Year</p>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="work" class="work">
+      <h3>Work Experience</h3>
+      <p id="display-company">Company</p>
+      <p id="display-years-worked">Years Worked</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <h3>Skills</h3>
+      <div id="display-skill-1"></div>
+      <div id="display-skill-2"></div>
+      <div id="display-skill-3"></div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section id="contact" class="contact">
+      <h3>Contact Information</h3>
+      <p>Email: <span id="display-email">email@example.com</span></p>
+      <p>Phone: <span id="display-phone">+123456789</span></p>
+    </section>
+  </div>
+
+  <script>
+    // Get the query parameters from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Display the values in the resume
+    document.getElementById("display-name").innerText = urlParams.get('name');
+    document.getElementById("display-job-title").innerText = urlParams.get('jobTitle');
+    document.getElementById("display-about").innerText = urlParams.get('about');
+    document.getElementById("display-email").innerText = urlParams.get('email');
+    document.getElementById("display-phone").innerText = urlParams.get('phone');
+    document.getElementById("display-degree").innerText = urlParams.get('degree');
+    document.getElementById("display-institution").innerText = urlParams.get('institution');
+    document.getElementById("display-year").innerText = urlParams.get('year');
+    document.getElementById("display-company").innerText = urlParams.get('company');
+    document.getElementById("display-years-worked").innerText = urlParams.get('yearsWorked');
+    document.getElementById("display-skill-1").innerText = urlParams.get('skill1');
+    document.getElementById("display-skill-2").innerText = urlParams.get('skill2');
+    document.getElementById("display-skill-3").innerText = urlParams.get('skill3');
+
+    // Display profile image
+    const profileImage = urlParams.get('profileImage');
+    if (profileImage) {
+      document.getElementById("display-image").src = profileImage;
+    }
+  </script>
+
+</body>
+</html>

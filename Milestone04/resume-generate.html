@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generated Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #b3f0ff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .resume-container {
+      background-color: #222;
+      border: 2px solid #00e6e6;
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffcc00;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00e6e6;
+    }
+
+    h3 {
+      color: #00e6e6;
+      margin-top: 20px;
+      font-size: 1.2em;
+      border-bottom: 2px solid #00e6e6;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .profile-picture img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #00e6e6;
+    }
+
+    .resume-container section {
+      margin-bottom: 15px;
+    }
+
+    .resume-container p {
+      font-size: 1em;
+      line-height: 1.4em;
+      margin: 5px 0;
+    }
+
+    .skills div {
+      margin-bottom: 8px;
+    }
+
+    .skills span {
+      background-color: #00e6e6;
+      color: #222;
+      padding: 5px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    /* Editable Field Styling */
+    [contenteditable="true"] {
+      background-color: #444;
+      border: 1px solid #00e6e6;
+      padding: 5px;
+      border-radius: 4px;
+    }
+
+    .download-section {
+      margin-top: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .download-section a {
+      background-color: #00e6e6;
+      color: #222;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .download-section a:hover {
+      background-color: #009999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="resume-container" id="resume-display">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="profile-picture">
+        <img src="" alt="Profile Picture" id="display-image" />
+        <button id="edit-image">Edit Profile Picture</button>
+        <input type="file" id="profile-image-input" style="display:none;" />
+      </div>
+      <h1 id="display-name" contenteditable="true">Full Name</h1>
+      <h2 id="display-job-title" contenteditable="true">Job Title</h2>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <h3>About Me</h3>
+      <p id="display-about" contenteditable="true">This is a placeholder for the about text. It will be dynamically replaced.</p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+      <h3>Education</h3>
+      <p id="display-degree" contenteditable="true">Degree</p>
+      <p id="display-institution" contenteditable="true">Institution</p>
+      <p id="display-year" contenteditable="true">Year</p>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="work" class="work">
+      <h3>Work Experience</h3>
+      <p id="display-company" contenteditable="true">Company</p>
+      <p id="display-years-worked" contenteditable="true">Years Worked</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+      <h3>Skills</h3>
+      <div id="display-skill-1" contenteditable="true"></div>
+      <div id="display-skill-2" contenteditable="true"></div>
+      <div id="display-skill-3" contenteditable="true"></div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section id="contact" class="contact">
+      <h3>Contact Information</h3>
+      <p>Email: <span id="display-email" contenteditable="true">email@example.com</span></p>
+      <p>Phone: <span id="display-phone" contenteditable="true">+123456789</span></p>
+    </section>
+
+    
+  </div>
+
+ 
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const profileImageInput = document.getElementById("profile-image-input");
+      const editImageButton = document.getElementById("edit-image");
+      const displayImage = document.getElementById("display-image");
+
+      // Check if there's a saved profile image in localStorage (if any)
+      const savedImage = localStorage.getItem("profileImage");
+      if (savedImage) {
+        // If there's a saved image, display it
+        displayImage.src = savedImage;
+      }
+
+      // Add event listener for file input change (when user selects a new image)
+      if (profileImageInput) {
+        profileImageInput.addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              // Set the profile image to the newly selected one
+              displayImage.src = e.target.result;
+
+              // Save the new image to localStorage (so it persists after reload)
+              localStorage.setItem("profileImage", e.target.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      // Open the file input when the "Edit Profile Picture" button is clicked
+      if (editImageButton) {
+        editImageButton.addEventListener("click", function () {
+          if (profileImageInput) {
+            profileImageInput.click();
+          }
+        });
+      }
+
+      // Add event listener for editable fields (so that changes are saved when editing)
+      const editableFields = document.querySelectorAll("[contenteditable='true']");
+      editableFields.forEach((field) => {
+        field.addEventListener("input", function () {
+          saveChanges(); // Save any changes when user edits fields
+        });
+      });
+    });
+
+    // Function to save all resume data (to localStorage)
+    function saveChanges() {
+      const name = document.getElementById("display-name").innerText;
+      const jobTitle = document.getElementById("display-job-title").innerText;
+      const about = document.getElementById("display-about").innerText;
+      const email = document.getElementById("display-email").innerText;
+      const phone = document.getElementById("display-phone").innerText;
+      const degree = document.getElementById("display-degree").innerText;
+      const institution = document.getElementById("display-institution").innerText;
+      const year = document.getElementById("display-year").innerText;
+      const company = document.getElementById("display-company").innerText;
+      const yearsWorked = document.getElementById("display-years-worked").innerText;
+      const skill1 = document.getElementById("display-skill-1").innerText;
+      const skill2 = document.getElementById("display-skill-2").innerText;
+      const skill3 = document.getElementById("display-skill-3").innerText;
+
+      const resumeData = {
+        name,
+        jobTitle,
+        about,
+        email,
+        phone,
+        degree,
+        institution,
+        year,
+        company,
+        yearsWorked,
+        skill1,
+        skill2,
+        skill3
+      };
+
+      localStorage.setItem("resumeData", JSON.stringify(resumeData));
+    }
+
+    // Load saved resume data from localStorage on page load
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedResume = localStorage.getItem("resumeData");
+      if (savedResume) {
+        const resume = JSON.parse(savedResume);
+        document.getElementById("display-name").innerText = resume.name || "Full Name";
+        document.getElementById("display-job-title").innerText = resume.jobTitle || "Job Title";
+        document.getElementById("display-about").innerText = resume.about || "About me";
+        document.getElementById("display-email").innerText = resume.email || "email@example.com";
+        document.getElementById("display-phone").innerText = resume.phone || "+123456789";
+        document.getElementById("display-degree").innerText = resume.degree || "Degree";
+        document.getElementById("display-institution").innerText = resume.institution || "Institution";
+        document.getElementById("display-year").innerText = resume.year || "Year";
+        document.getElementById("display-company").innerText = resume.company || "Company";
+        document.getElementById("display-years-worked").innerText = resume.yearsWorked || "Years Worked";
+        document.getElementById("display-skill-1").innerText = resume.skill1 || "";
+        document.getElementById("display-skill-2").innerText = resume.skill2 || "";
+        document.getElementById("display-skill-3").innerText = resume.skill3 || "";
+      }
+      
+    });
+
+    
+  </script>
+
+</body>
+
+</html>

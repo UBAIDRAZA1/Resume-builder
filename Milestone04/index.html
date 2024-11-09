@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Muhammad Ubaid Raza</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="resume-container">
+    <!-- "Create Resume" Button Inside Resume -->
+    <div class="create-resume-btn">
+      <a href="create.html">Create Resume</a>
+    </div>
+
+    <header class="header">
+      <div class="profile-picture">
+        <img src="image1.jpeg" alt="Muhammad Ubaid Raza">
+      </div>
+      <h1>MUHAMMAD UBAID RAZA</h1>
+      <h2>Web Developer</h2>
+    </header>
+
+    <section id="about" class="about">
+      <h3><u>Personal Information</u></h3>
+      <p>A passionate student of IT, Cloud Computing, Gen AI, Web 3.0 & Web Developer at Governor House Karachi. Always eager to learn new technologies and explore innovative solutions.</p>
+    </section>
+    <button onclick="toggleSection('about', this)">Hide About</button>
+    
+    <section id="education" class="education"><br/><br/>
+      <h3><u>Education</u></h3>
+      <div class="education-box">
+        <p>BS Software Engineering, Ilma University (Ongoing)</p>
+      </div>
+      <div class="education-box">
+        <p>Intermediate (Pre-Engineering), HEC Karachi (2021, B Grade)</p>
+      </div>
+      <div class="education-box">
+        <p>Matriculation (Computer Science), BSE Karachi (2019, A Grade)</p>
+      </div>
+      <div class="education-box">
+        <p>CIT Web Development, IOBM NAVTTC Program</p>
+      </div>
+      <div class="education-box">
+        <p>Darse Nizami (Alim Course), Kanzul Madaris Pakistan (5 years completed)</p>
+      </div>
+      <div class="education-box">
+        <p>Hifzul Quran ul Karim (Hafiz), Madarsa tul Madina</p>
+      </div>
+    </section>
+    <button onclick="toggleSection('education', this)">Hide Education</button>
+    
+    <section id="skills" class="skills"><br/><br/>
+      <h3><u>Skills</u></h3>
+      <div class="skill">
+        <span>HTML</span>
+        <div class="progress-bar" style="width: 80%;"></div>
+      </div>
+      <div class="skill">
+        <span>CSS</span>
+        <div class="progress-bar" style="width: 70%;"></div>
+      </div>
+      <div class="skill">
+        <span>JavaScript</span>
+        <div class="progress-bar" style="width: 75%;"></div>
+      </div>
+      <div class="skill">
+        <span>TypeScript</span>
+        <div class="progress-bar" style="width: 65%;"></div>
+      </div>
+      <div class="skill">
+        <span>React</span>
+        <div class="progress-bar" style="width: 85%;"></div>
+      </div>
+      <div class="skill">
+        <span>Next.js</span>
+        <div class="progress-bar" style="width: 70%;"></div>
+      </div>
+      <div class="skill">
+        <span>MySQL</span>
+        <div class="progress-bar" style="width: 60%;"></div>
+      </div>
+    </section>
+    <button onclick="toggleSection('skills', this)">Hide Skills</button>
+
+    <section id="hobbies" class="hobbies"><br/><br/>
+      <h3><u>Hobbies</u></h3>
+      <div class="hobbies-container">
+        <button class="hobby">CODING</button>
+        <button class="hobby">READING</button>
+        <button class="hobby">RESEARCH</button>
+        <button class="hobby">TEACHING</button>
+      </div>
+    </section>
+    <button onclick="toggleSection('hobbies', this)">Hide Hobbies</button>
+    
+    <section class="social"><br/><br/>
+      <h3>Social</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" class="icon facebook" target="_blank">F</a>
+        <a href="https://github.com/UBAIDRAZA1?tab=repositories" class="icon github" target="_blank" >G</a>
+        <a href="https://www.linkedin.com/in/muhammad-ubaid-raza-21b850300/" class="icon linkedin" target="_blank" >L</a>
+        <a href="#" class="icon twitter">T</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Function to toggle visibility of a section
+    function toggleSection(sectionId, button) {
+      const section = document.getElementById(sectionId);
+      // Toggle the section visibility
+      section.classList.toggle('hidden');
+      // Toggle button text between 'Hide' and 'Show'
+      if (section.classList.contains('hidden')) {
+        button.innerText = 'Show ' + sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+      } else {
+        button.innerText = 'Hide ' + sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+      }
+    }
+  </script>
+
+  <style>
+    /* Hidden class for hiding sections */
+    .hidden {
+      display: none;
+    }
+  </style>
+
+</body>
+</html>

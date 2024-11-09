@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #b3f0ff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-container {
+      background-color: #222;
+      border: 2px solid #00e6e6;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffcc00;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #00e6e6;
+    }
+
+    input[type="text"], input[type="email"], input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #00e6e6;
+      background-color: #333;
+      color: #b3f0ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: #00e6e6;
+      color: #222;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Form Section -->
+  <div class="form-container">
+    <h1>Resume Generator</h1>
+    <label for="name">Full Name:</label>
+    <input type="text" id="name">
+
+    <label for="job-title">Job Title:</label>
+    <input type="text" id="job-title">
+
+    <label for="about">About Me:</label>
+    <input type="text" id="about">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email">
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone">
+
+    <label for="degree">Degree:</label>
+    <input type="text" id="degree">
+
+    <label for="institution">Institution:</label>
+    <input type="text" id="institution">
+
+    <label for="year">Year:</label>
+    <input type="text" id="year">
+
+    <label for="company">Company:</label>
+    <input type="text" id="company">
+
+    <label for="years-worked">Years Worked:</label>
+    <input type="text" id="years-worked">
+
+    <label for="skill-1">Skill 1:</label>
+    <input type="text" id="skill-1">
+
+    <label for="skill-2">Skill 2:</label>
+    <input type="text" id="skill-2">
+
+    <label for="skill-3">Skill 3:</label>
+    <input type="text" id="skill-3">
+
+    <label for="profile-image">Profile Image:</label>
+    <input type="file" id="profile-image">
+
+    <button id="submit">Generate Resume</button>
+  </div>
+
+  <script>
+    document.getElementById("submit").addEventListener("click", function (event) {
+      event.preventDefault();
+
+      // Personal Information
+      const name = document.getElementById("name").value;
+      const jobTitle = document.getElementById("job-title").value;
+      const about = document.getElementById("about").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+
+      // Education
+      const degree = document.getElementById("degree").value;
+      const institution = document.getElementById("institution").value;
+      const year = document.getElementById("year").value;
+
+      // Work Experience
+      const company = document.getElementById("company").value;
+      const yearsWorked = document.getElementById("years-worked").value;
+
+      // Skills
+      const skill1 = document.getElementById("skill-1").value;
+      const skill2 = document.getElementById("skill-2").value;
+      const skill3 = document.getElementById("skill-3").value;
+
+      // Handle profile image upload and convert to base64
+      const profileImage = document.getElementById("profile-image").files[0];
+      let profileImageBase64 = '';
+      if (profileImage) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profileImageBase64 = e.target.result;
+
+          // Create a query string to pass data to the new page
+          const resumeData = new URLSearchParams({
+            name,
+            jobTitle,
+            about,
+            email,
+            phone,
+            degree,
+            institution,
+            year,
+            company,
+            yearsWorked,
+            skill1,
+            skill2,
+            skill3,
+            profileImage: profileImageBase64
+          }).toString();
+
+          // Open the resume page with the query string
+          window.open('resume-generate.html?' + resumeData, '_blank');
+        };
+        reader.readAsDataURL(profileImage);
+      } else {
+        // In case no image is selected, continue with the rest of the data
+        const resumeData = new URLSearchParams({
+          name,
+          jobTitle,
+          about,
+          email,
+          phone,
+          degree,
+          institution,
+          year,
+          company,
+          yearsWorked,
+          skill1,
+          skill2,
+          skill3
+        }).toString();
+
+        // Open the resume page with the query string
+        window.open('resume-generate.html?' + resumeData, '_blank');
+      }
+    });
+  </script>
+
+</body>
+</html>

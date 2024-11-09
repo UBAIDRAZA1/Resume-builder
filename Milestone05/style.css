@@ -1,0 +1,412 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.hidden {
+  display: none;
+}
+
+body {
+  background-color: #3b3a3a;
+  color: #84f1ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.resume-container {
+  width: 90%;
+  max-width: 600px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px #84f1ff;
+}
+
+/* Flex layout for image on the right and text on the left */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse; /* Image on the right */
+  margin-bottom: 20px;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #84f1ff;
+}
+
+.header h1 {
+  color: #84f1ff;
+  text-align: left;
+  margin: 0;
+}
+
+.header h2 {
+  color: #ffeb7c;
+  text-align: left;
+  margin-top: 120px; /* Adjust margin to position h2 correctly below h1 */
+}
+
+/* Section Styles */
+h3 {
+  color: #ffeb7c;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.about, .education, .skills {
+  margin-bottom: 20px;
+}
+
+.about p, .education ul, .skills ul {
+  font-size: 1em;
+  color: #84f1ff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #84f1ff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Education Box Styling */
+.education-box {
+  background-color: #222;
+  color: #84f1ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #84f1ff;
+}
+
+.education-box p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Skills Progress Bar Styling */
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill span {
+  color: #84f1ff;
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.progress-bar {
+  background-color: #444;
+  height: 8px;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 5px;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #84f1ff;
+}
+
+/* Hobbies Section */
+.hobbies-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hobby {
+  background-color: #111;
+  color: #84f1ff;
+  padding: 10px 20px;
+  border: 2px solid #84f1ff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #84f1ff;
+  transition: all 0.3s;
+}
+
+.hobby:hover {
+  background-color: #84f1ff;
+  color: #000;
+  box-shadow: 0 0 20px #84f1ff, 0 0 30px #84f1ff;
+}
+
+/* Social Section */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.icon {
+  color: #84f1ff;
+  font-size: 24px;
+  text-decoration: none;
+  padding: 10px;
+  border: 2px solid #84f1ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 0 10px #84f1ff;
+  transition: all 0.3s;
+}
+
+.icon:hover {
+  background-color: #84f1ff;
+  color: #000;
+  box-shadow: 0 0 20px #84f1ff, 0 0 30px #84f1ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .resume-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .header {
+    flex-direction: column; /* Stacks image and text vertically on small screens */
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-picture img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+  }
+
+  .header h1, .header h2 {
+    text-align: center;
+  }
+
+  h1, h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+  button {
+    padding: 8px;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-picture img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h1, h2 {
+    font-size: 1.2em;
+  }
+
+  h3 {
+    font-size: 1em;
+  }
+
+  .social-icons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+}
+/* Styling for the "Create Resume" button inside the resume */
+.create-resume-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #84f1ff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.create-resume-btn a {
+  color: black;
+  text-decoration: none;
+}
+
+.create-resume-btn a:hover {
+  
+  box-shadow: 0 0 20px #84f1ff, 0 0 30px #84f1ff;
+}
+
+
+
+
+
+/* Ensuring the resume container has relative positioning */
+.resume-container {
+  position: relative;
+  padding-top: 40px; /* Adjust for space at the top for button */
+}
+
+
+
+/* Form styling */
+.resume-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+/* Section styling for each form group */
+.form-section {
+  background-color: #2b2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h3 {
+  margin: 0 0 10px;
+  color: #ffeb7c;
+}
+
+/* Label styling */
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #84f1ff;
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+  color: white;
+  background-color: #494444;
+}
+
+/* Image Upload styling */
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #fffefe;
+  border-radius: 4px;
+  background-color: #736e6e;
+}
+
+/* Button styling */
+.generate-btn {
+  padding: 12px;
+  background-color: #ffeb7c;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.generate-btn:hover {
+  background-color: #84f1ff;
+}
+/* Basic Styling for Resume Display */
+#resume-display {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#resume-display h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Profile Image */
+#display-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Information Sections */
+#personal-info, #education-info, #work-info, #skills-info {
+  margin-bottom: 20px;
+}
+
+#personal-info h3, #education-info h3, #work-info h3, #skills-info h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+/* Hidden Section (Initially hidden sections) */
+.hidden {
+  display: none;
+}
