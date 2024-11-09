@@ -211,7 +211,26 @@
 
       // Placeholder for a unique live URL
       const username = "username"; // Replace with dynamic value if backend is available
-      const liveUrl = `https://${username}.vercel.app/resume?name=${encodeURIComponent("John Doe")}`;
+     // Save resume data in localStorage
+const savedResumeData = {
+  name: "John Doe",
+  jobTitle: "Software Developer",
+  about: "A passionate developer",
+  email: "john@example.com",
+};
+
+localStorage.setItem("resumeData", JSON.stringify(savedResumeData));
+
+// On page load (or reload), fetch data from localStorage
+const savedData = JSON.parse(localStorage.getItem("resumeData"));
+if (savedData) {
+  document.getElementById("display-name").innerText = savedData.name;
+  document.getElementById("display-job-title").innerText = savedData.jobTitle;
+  document.getElementById("display-about").innerText = savedData.about;
+  document.getElementById("display-email").innerText = savedData.email;
+  // Similarly, load other sections if needed
+}
+
       document.getElementById("live-url").href = liveUrl;
 
       // Save editable content to localStorage
