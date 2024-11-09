@@ -62,7 +62,7 @@
   </style>
 </head>
 <body>
-<form method="POST" action="your-server-endpoint">
+<form method="POST" action="your-server-endpoint" >
   <!-- Form Section -->
   <div class="form-container">
     <h1>Resume Generator</h1>
@@ -106,70 +106,46 @@
     <input type="text" id="skill-3">
 
     <label for="profile-image">Profile Image:</label>
-   
-    <input type="file" id="profile-image" accept="image/*" />
-<img id="display-image" alt="Profile Image" />
+    <input type="file" id="profile-image">
 
     <button id="submit">Generate Resume</button>
   </div>
 </form>
-  <script>
-    document.getElementById("submit").addEventListener("click", function (event) {
-      event.preventDefault();
 
-      // Personal Information
-      const name = document.getElementById("name").value;
-      const jobTitle = document.getElementById("job-title").value;
-      const about = document.getElementById("about").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
+<script>
+  document.getElementById("submit").addEventListener("click", function (event) {
+    event.preventDefault();
 
-      // Education
-      const degree = document.getElementById("degree").value;
-      const institution = document.getElementById("institution").value;
-      const year = document.getElementById("year").value;
+    // Personal Information
+    const name = document.getElementById("name").value;
+    const jobTitle = document.getElementById("job-title").value;
+    const about = document.getElementById("about").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
 
-      // Work Experience
-      const company = document.getElementById("company").value;
-      const yearsWorked = document.getElementById("years-worked").value;
+    // Education
+    const degree = document.getElementById("degree").value;
+    const institution = document.getElementById("institution").value;
+    const year = document.getElementById("year").value;
 
-      // Skills
-      const skill1 = document.getElementById("skill-1").value;
-      const skill2 = document.getElementById("skill-2").value;
-      const skill3 = document.getElementById("skill-3").value;
+    // Work Experience
+    const company = document.getElementById("company").value;
+    const yearsWorked = document.getElementById("years-worked").value;
 
-      // Handle profile image upload and convert to base64
-      const profileImage = document.getElementById("profile-image").files[0];
-      let profileImageBase64 = '';
-      if (profileImage) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          profileImageBase64 = e.target.result;
+    // Skills
+    const skill1 = document.getElementById("skill-1").value;
+    const skill2 = document.getElementById("skill-2").value;
+    const skill3 = document.getElementById("skill-3").value;
 
-          // Create a query string to pass data to the new page
-          const resumeData = new URLSearchParams({
-            name,
-            jobTitle,
-            about,
-            email,
-            phone,
-            degree,
-            institution,
-            year,
-            company,
-            yearsWorked,
-            skill1,
-            skill2,
-            skill3,
-            profileImage: profileImageBase64
-          }).toString();
+    // Handle profile image upload and convert to base64
+    const profileImage = document.getElementById("profile-image").files[0];
+    let profileImageBase64 = '';
+    if (profileImage) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        profileImageBase64 = e.target.result;
 
-          // Open the resume page with the query string
-          window.open('resume-generate.html?' + resumeData, '_blank');
-        };
-        reader.readAsDataURL(profileImage);
-      } else {
-        // In case no image is selected, continue with the rest of the data
+        // Create a query string to pass data to the new page
         const resumeData = new URLSearchParams({
           name,
           jobTitle,
@@ -183,14 +159,37 @@
           yearsWorked,
           skill1,
           skill2,
-          skill3
+          skill3,
+          profileImage: profileImageBase64
         }).toString();
 
         // Open the resume page with the query string
         window.open('resume-generate.html?' + resumeData, '_blank');
-      }
-    });
-  </script>
+      };
+      reader.readAsDataURL(profileImage);
+    } else {
+      // In case no image is selected, continue with the rest of the data
+      const resumeData = new URLSearchParams({
+        name,
+        jobTitle,
+        about,
+        email,
+        phone,
+        degree,
+        institution,
+        year,
+        company,
+        yearsWorked,
+        skill1,
+        skill2,
+        skill3
+      }).toString();
+
+      // Open the resume page with the query string
+      window.open('resume-generate.html?' + resumeData, '_blank');
+    }
+  });
+</script>
 
 </body>
 </html>
