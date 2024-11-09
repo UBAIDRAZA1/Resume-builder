@@ -62,7 +62,7 @@
   </style>
 </head>
 <body>
-<form method="POST" action="your-server-endpoint" >
+<form method="POST" action="your-server-endpoint">
   <!-- Form Section -->
   <div class="form-container">
     <h1>Resume Generator</h1>
@@ -136,6 +136,12 @@
     const skill1 = document.getElementById("skill-1").value;
     const skill2 = document.getElementById("skill-2").value;
     const skill3 = document.getElementById("skill-3").value;
+
+    // Validate input fields (make sure none of them are empty)
+    if (!name || !jobTitle || !about || !email || !phone || !degree || !institution || !year || !company || !yearsWorked || !skill1 || !skill2 || !skill3) {
+      alert("Please fill in all the fields.");
+      return; // Stop the function if validation fails
+    }
 
     // Handle profile image upload and convert to base64
     const profileImage = document.getElementById("profile-image").files[0];
