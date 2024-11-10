@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,274 +9,217 @@
       font-family: Arial, sans-serif;
       background-color: #333;
       color: #b3f0ff;
-      margin: 0;
       padding: 20px;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      min-height: 100vh;
+      margin: 0;
     }
-
     .resume-container {
       background-color: #222;
       border: 2px solid #00e6e6;
-      padding: 20px;
-      width: 100%;
-      max-width: 600px;
       border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
-
-    h1 {
+    h2 {
       text-align: center;
       color: #ffcc00;
     }
-
-    h2 {
-      text-align: center;
-      color: #00e6e6;
+    .section {
+      margin-bottom: 15px;
     }
-
-    h3 {
+    .section h3 {
       color: #00e6e6;
-      margin-top: 20px;
-      font-size: 1.2em;
-      border-bottom: 2px solid #00e6e6;
+      border-bottom: 1px solid #00e6e6;
       padding-bottom: 5px;
       margin-bottom: 10px;
     }
-
-    .profile-picture img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid #00e6e6;
-    }
-
-    .resume-container section {
-      margin-bottom: 15px;
-    }
-
-    .resume-container p {
-      font-size: 1em;
-      line-height: 1.4em;
+    .section p {
       margin: 5px 0;
     }
-
-    .skills div {
-      margin-bottom: 8px;
-    }
-
-    .skills span {
-      background-color: #00e6e6;
-      color: #222;
+    input {
+      width: 100%;
       padding: 5px;
-      border-radius: 4px;
-      margin-right: 8px;
-    }
-
-    [contenteditable="true"] {
-      background-color: #444;
+      margin-top: 5px;
       border: 1px solid #00e6e6;
-      padding: 5px;
       border-radius: 4px;
+      background-color: #333;
+      color: #b3f0ff;
     }
-
-    .download-section {
-      margin-top: 20px;
-      text-align: center;
+    img {
       display: block;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
     }
-
-    .download-section a {
+    .edit-btn, .save-btn {
       background-color: #00e6e6;
+      border: none;
       color: #222;
-      padding: 10px 20px;
-      text-decoration: none;
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
       border-radius: 4px;
-      margin: 5px;
+      font-weight: bold;
     }
-
-    .download-section a:hover {
-      background-color: #009999;
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .pdf-btn, .live-url-btn {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .live-url {
+      color: #00e6e6;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .copy-btn {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 10px;
     }
   </style>
 </head>
-
 <body>
+  <div class="resume-container" id="resume">
+    <h2>Generated Resume</h2>
+    <img id="profileImage" src="" alt="Profile Image">
 
-  <div class="resume-container" id="resume-display">
-    <!-- Header Section -->
-    <header class="header">
-      <div class="profile-picture">
-        <img src="" alt="Profile Picture" id="display-image" />
-        <button id="edit-image">Edit Profile Picture</button>
-        <input type="file" id="profile-image-input" style="display:none;" />
-      </div>
-      <h1 id="display-name" contenteditable="true">Full Name</h1>
-      <h2 id="display-job-title" contenteditable="true">Job Title</h2>
-    </header>
+    <div class="section">
+      <h3>Personal Information</h3>
+      <p><strong>Name:</strong> <span id="displayName"></span> <input type="text" id="editName" style="display:none;"></p>
+      <p><strong>Job Title:</strong> <span id="displayJobTitle"></span> <input type="text" id="editJobTitle" style="display:none;"></p>
+      <p><strong>About Me:</strong> <span id="displayAbout"></span> <input type="text" id="editAbout" style="display:none;"></p>
+      <p><strong>Email:</strong> <span id="displayEmail"></span> <input type="email" id="editEmail" style="display:none;"></p>
+      <p><strong>Phone:</strong> <span id="displayPhone"></span> <input type="text" id="editPhone" style="display:none;"></p>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-      <h3>About Me</h3>
-      <p id="display-about" contenteditable="true">This is a placeholder for the about text. It will be dynamically replaced.</p>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="education">
+    <div class="section">
       <h3>Education</h3>
-      <p id="display-degree" contenteditable="true">Degree</p>
-      <p id="display-institution" contenteditable="true">Institution</p>
-      <p id="display-year" contenteditable="true">Year</p>
-    </section>
+      <p><strong>Degree:</strong> <span id="displayDegree"></span> <input type="text" id="editDegree" style="display:none;"></p>
+      <p><strong>Institution:</strong> <span id="displayInstitution"></span> <input type="text" id="editInstitution" style="display:none;"></p>
+      <p><strong>Year:</strong> <span id="displayYear"></span> <input type="text" id="editYear" style="display:none;"></p>
+    </div>
 
-    <!-- Work Experience Section -->
-    <section id="work" class="work">
+    <div class="section">
       <h3>Work Experience</h3>
-      <p id="display-company" contenteditable="true">Company</p>
-      <p id="display-years-worked" contenteditable="true">Years Worked</p>
-    </section>
+      <p><strong>Company:</strong> <span id="displayCompany"></span> <input type="text" id="editCompany" style="display:none;"></p>
+      <p><strong>Years Worked:</strong> <span id="displayYearsWorked"></span> <input type="text" id="editYearsWorked" style="display:none;"></p>
+    </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <div class="section">
       <h3>Skills</h3>
-      <div id="display-skill-1" contenteditable="true">Skill 1</div>
-      <div id="display-skill-2" contenteditable="true">Skill 2</div>
-      <div id="display-skill-3" contenteditable="true">Skill 3</div>
-    </section>
+      <p><strong>Skill 1:</strong> <span id="displaySkill1"></span> <input type="text" id="editSkill1" style="display:none;"></p>
+      <p><strong>Skill 2:</strong> <span id="displaySkill2"></span> <input type="text" id="editSkill2" style="display:none;"></p>
+      <p><strong>Skill 3:</strong> <span id="displaySkill3"></span> <input type="text" id="editSkill3" style="display:none;"></p>
+    </div>
 
-    <!-- Contact Information Section -->
-    <section id="contact" class="contact">
-      <h3>Contact Information</h3>
-      <p>Email: <span id="display-email" contenteditable="true">email@example.com</span></p>
-      <p>Phone: <span id="display-phone" contenteditable="true">+123456789</span></p>
-    </section>
+    <button class="edit-btn" id="editButton">Edit</button>
+    <button class="save-btn" id="saveButton" style="display: none;">Save</button>
+
+    <div class="action-buttons">
+      <button class="pdf-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="live-url-btn" onclick="generateLiveURL()">Generate Live URL</button>
+    </div>
+
+    <p class="live-url" id="displayURL" style="display:none;">
+      <strong>Your Live URL: </strong><a href="#" target="_blank" id="liveURLLink"></a>
+    </p>
+    <button class="copy-btn" id="copyButton" style="display:none;" onclick="copyToClipboard()">Copy Live URL</button>
   </div>
 
-  <!-- Download Section -->
-  <div class="download-section">
-    <a href="#" id="download-resume">Download as PDF</a>
-    <br><br><br>
-    <a href="#" id="live-url" target="_blank">View your live resume!</a>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const profileImageInput = document.getElementById("profile-image-input");
-      const editImageButton = document.getElementById("edit-image");
-      const displayImage = document.getElementById("display-image");
+    const resumeData = JSON.parse(localStorage.getItem("resumeData")) || {};
 
-      // Load profile picture from local storage
-      const savedImage = localStorage.getItem("profileImage");
-      if (savedImage) {
-        displayImage.src = savedImage;
+    function loadData() {
+      document.getElementById("displayName").innerText = resumeData.name || "";
+      document.getElementById("displayJobTitle").innerText = resumeData.jobTitle || "";
+      document.getElementById("displayAbout").innerText = resumeData.about || "";
+      document.getElementById("displayEmail").innerText = resumeData.email || "";
+      document.getElementById("displayPhone").innerText = resumeData.phone || "";
+
+      document.getElementById("displayDegree").innerText = resumeData.degree || "";
+      document.getElementById("displayInstitution").innerText = resumeData.institution || "";
+      document.getElementById("displayYear").innerText = resumeData.year || "";
+
+      document.getElementById("displayCompany").innerText = resumeData.company || "";
+      document.getElementById("displayYearsWorked").innerText = resumeData.yearsWorked || "";
+
+      document.getElementById("displaySkill1").innerText = resumeData.skill1 || "";
+      document.getElementById("displaySkill2").innerText = resumeData.skill2 || "";
+      document.getElementById("displaySkill3").innerText = resumeData.skill3 || "";
+
+      if (resumeData.profileImage) {
+        document.getElementById("profileImage").src = resumeData.profileImage;
       }
+    }
 
-      if (profileImageInput) {
-        profileImageInput.addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              displayImage.src = e.target.result;
-              localStorage.setItem("profileImage", e.target.result);
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-      }
+    loadData();
 
-      if (editImageButton) {
-        editImageButton.addEventListener("click", function () {
-          if (profileImageInput) {
-            profileImageInput.click();
-          }
-        });
-      }
-
-      const editableFields = document.querySelectorAll("[contenteditable='true']");
-      editableFields.forEach((field) => {
-        field.addEventListener("input", function () {
-          saveChanges();
-        });
+    document.getElementById("editButton").addEventListener("click", () => {
+      document.querySelectorAll("span").forEach(el => el.style.display = "none");
+      document.querySelectorAll("input").forEach(el => {
+        el.style.display = "block";
+        el.value = resumeData[el.id.replace("edit", "").toLowerCase()] || "";
       });
-
-      // PDF Download
-      document.getElementById("download-resume").addEventListener("click", function () {
-        const resumeDisplay = document.getElementById("resume-display");
-        html2pdf().from(resumeDisplay).save("resume.pdf");
-      });
-
-      // Placeholder for a unique live URL
-      const username = "username"; // Replace with dynamic value if backend is available
-     // Save resume data in localStorage
-const savedResumeData = {
-  name: "John Doe",
-  jobTitle: "Software Developer",
-  about: "A passionate developer",
-  email: "john@example.com",
-};
-
-localStorage.setItem("resumeData", JSON.stringify(savedResumeData));
-
-// On page load (or reload), fetch data from localStorage
-const savedData = JSON.parse(localStorage.getItem("resumeData"));
-if (savedData) {
-  document.getElementById("display-name").innerText = savedData.name;
-  document.getElementById("display-job-title").innerText = savedData.jobTitle;
-  document.getElementById("display-about").innerText = savedData.about;
-  document.getElementById("display-email").innerText = savedData.email;
-  // Similarly, load other sections if needed
-}
-
-      document.getElementById("live-url").href = liveUrl;
-
-      // Save editable content to localStorage
-      function saveChanges() {
-        const name = document.getElementById("display-name").innerText;
-        const jobTitle = document.getElementById("display-job-title").innerText;
-        const about = document.getElementById("display-about").innerText;
-        const email = document.getElementById("display-email").innerText;
-        const phone = document.getElementById("display-phone").innerText;
-        const degree = document.getElementById("display-degree").innerText;
-        const institution = document.getElementById("display-institution").innerText;
-        const year = document.getElementById("display-year").innerText;
-        const company = document.getElementById("display-company").innerText;
-        const yearsWorked = document.getElementById("display-years-worked").innerText;
-        const skill1 = document.getElementById("display-skill-1").innerText;
-        const skill2 = document.getElementById("display-skill-2").innerText;
-        const skill3 = document.getElementById("display-skill-3").innerText;
-
-        const resumeData = { name, jobTitle, about, email, phone, degree, institution, year, company, yearsWorked, skill1, skill2, skill3 };
-
-        localStorage.setItem("resumeData", JSON.stringify(resumeData));
-      }
-
-      // Load saved resume data
-      function loadSavedData() {
-        const savedData = localStorage.getItem("resumeData");
-        if (savedData) {
-          const resumeData = JSON.parse(savedData);
-          document.getElementById("display-name").innerText = resumeData.name;
-          document.getElementById("display-job-title").innerText = resumeData.jobTitle;
-          document.getElementById("display-about").innerText = resumeData.about;
-          document.getElementById("display-email").innerText = resumeData.email;
-          document.getElementById("display-phone").innerText = resumeData.phone;
-          document.getElementById("display-degree").innerText = resumeData.degree;
-          document.getElementById("display-institution").innerText = resumeData.institution;
-          document.getElementById("display-year").innerText = resumeData.year;
-          document.getElementById("display-company").innerText = resumeData.company;
-          document.getElementById("display-years-worked").innerText = resumeData.yearsWorked;
-          document.getElementById("display-skill-1").innerText = resumeData.skill1;
-          document.getElementById("display-skill-2").innerText = resumeData.skill2;
-          document.getElementById("display-skill-3").innerText = resumeData.skill3;
-        }
-      }
-
-      loadSavedData();
+      document.getElementById("editButton").style.display = "none";
+      document.getElementById("saveButton").style.display = "block";
     });
+
+    document.getElementById("saveButton").addEventListener("click", () => {
+      document.querySelectorAll("input").forEach(el => {
+        resumeData[el.id.replace("edit", "").toLowerCase()] = el.value;
+      });
+      localStorage.setItem("resumeData", JSON.stringify(resumeData));
+      loadData();
+      document.getElementById("saveButton").style.display = "none";
+      document.getElementById("editButton").style.display = "block";
+    });
+
+    function downloadPDF() {
+      const element = document.getElementById("resume");
+      html2pdf().from(element).save("resume.pdf");
+    }
+
+    function generateLiveURL() {
+      // Create a unique URL based on the resume data
+      const uniqueID = 'resume-' + Date.now();
+      const url = window.location.href.split('?')[0] + "?resume=" + uniqueID;
+      resumeData.liveURL = url;
+      localStorage.setItem("resumeData", JSON.stringify(resumeData));
+
+      // Display the URL
+      const liveURLLink = document.getElementById("liveURLLink");
+      liveURLLink.href = url;
+      liveURLLink.innerText = url;
+      document.getElementById("displayURL").style.display = "block";
+      document.getElementById("copyButton").style.display = "block";
+    }
+
+    function copyToClipboard() {
+      const url = document.getElementById("liveURLLink").innerText;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Live URL copied to clipboard!");
+      });
+    }
   </script>
 </body>
-
 </html>

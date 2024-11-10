@@ -78,7 +78,7 @@
 </head>
 <body>
 
-  <div class="resume-container" id="resume-display">
+  <div class="resume-container" id="resume-container">
     <!-- Header Section -->
     <header class="header">
       <div class="profile-picture">
@@ -126,28 +126,34 @@
   </div>
 
   <script>
-    // Get the query parameters from the URL
-    const urlParams = new URLSearchParams(window.location.search);
+    // Retrieve data from localStorage
+    const resumeData = JSON.parse(localStorage.getItem("resumeData"));
 
-    // Display the values in the resume
-    document.getElementById("display-name").innerText = urlParams.get('name');
-    document.getElementById("display-job-title").innerText = urlParams.get('jobTitle');
-    document.getElementById("display-about").innerText = urlParams.get('about');
-    document.getElementById("display-email").innerText = urlParams.get('email');
-    document.getElementById("display-phone").innerText = urlParams.get('phone');
-    document.getElementById("display-degree").innerText = urlParams.get('degree');
-    document.getElementById("display-institution").innerText = urlParams.get('institution');
-    document.getElementById("display-year").innerText = urlParams.get('year');
-    document.getElementById("display-company").innerText = urlParams.get('company');
-    document.getElementById("display-years-worked").innerText = urlParams.get('yearsWorked');
-    document.getElementById("display-skill-1").innerText = urlParams.get('skill1');
-    document.getElementById("display-skill-2").innerText = urlParams.get('skill2');
-    document.getElementById("display-skill-3").innerText = urlParams.get('skill3');
+    if (resumeData) {
+      // Display data on the page without changing the layout structure
+      document.getElementById("display-name").innerText = resumeData.name;
+      document.getElementById("display-job-title").innerText = resumeData.jobTitle;
+      document.getElementById("display-about").innerText = resumeData.about;
+      document.getElementById("display-email").innerText = resumeData.email;
+      document.getElementById("display-phone").innerText = resumeData.phone;
+      document.getElementById("display-degree").innerText = resumeData.degree;
+      document.getElementById("display-institution").innerText = resumeData.institution;
+      document.getElementById("display-year").innerText = resumeData.year;
+      document.getElementById("display-company").innerText = resumeData.company;
+      document.getElementById("display-years-worked").innerText = resumeData.yearsWorked;
+      document.getElementById("display-skill-1").innerText = resumeData.skill1;
+      document.getElementById("display-skill-2").innerText = resumeData.skill2;
+      document.getElementById("display-skill-3").innerText = resumeData.skill3;
 
-    // Display profile image
-    const profileImage = urlParams.get('profileImage');
-    if (profileImage) {
-      document.getElementById("display-image").src = profileImage;
+      // If profile image data is available, display it
+      if (resumeData.profileImage) {
+        document.getElementById("display-image").src = resumeData.profileImage;
+      }
+
+      // Clear data from localStorage if not needed further
+      localStorage.removeItem("resumeData");
+    } else {
+      document.getElementById("resume-container").innerText = "No data available to generate resume.";
     }
   </script>
 

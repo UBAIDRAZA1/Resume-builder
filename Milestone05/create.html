@@ -62,97 +62,112 @@
   </style>
 </head>
 <body>
-<form method="POST" action="your-server-endpoint">
-  <!-- Form Section -->
-  <div class="form-container">
-    <h1>Resume Generator</h1>
-    <label for="name">Full Name:</label>
-    <input type="text" id="name">
+  <form>
+    <div class="form-container">
+      <h1>Resume Generator</h1>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name">
 
-    <label for="job-title">Job Title:</label>
-    <input type="text" id="job-title">
+      <label for="job-title">Job Title:</label>
+      <input type="text" id="job-title">
 
-    <label for="about">About Me:</label>
-    <input type="text" id="about">
+      <label for="about">About Me:</label>
+      <input type="text" id="about">
 
-    <label for="email">Email:</label>
-    <input type="email" id="email">
+      <label for="email">Email:</label>
+      <input type="email" id="email">
 
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone">
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone">
 
-    <label for="degree">Degree:</label>
-    <input type="text" id="degree">
+      <label for="degree">Degree:</label>
+      <input type="text" id="degree">
 
-    <label for="institution">Institution:</label>
-    <input type="text" id="institution">
+      <label for="institution">Institution:</label>
+      <input type="text" id="institution">
 
-    <label for="year">Year:</label>
-    <input type="text" id="year">
+      <label for="year">Year:</label>
+      <input type="text" id="year">
 
-    <label for="company">Company:</label>
-    <input type="text" id="company">
+      <label for="company">Company:</label>
+      <input type="text" id="company">
 
-    <label for="years-worked">Years Worked:</label>
-    <input type="text" id="years-worked">
+      <label for="years-worked">Years Worked:</label>
+      <input type="text" id="years-worked">
 
-    <label for="skill-1">Skill 1:</label>
-    <input type="text" id="skill-1">
+      <label for="skill-1">Skill 1:</label>
+      <input type="text" id="skill-1">
 
-    <label for="skill-2">Skill 2:</label>
-    <input type="text" id="skill-2">
+      <label for="skill-2">Skill 2:</label>
+      <input type="text" id="skill-2">
 
-    <label for="skill-3">Skill 3:</label>
-    <input type="text" id="skill-3">
+      <label for="skill-3">Skill 3:</label>
+      <input type="text" id="skill-3">
 
-    <label for="profile-image">Profile Image:</label>
-    <input type="file" id="profile-image">
+      <label for="profile-image">Profile Image:</label>
+      <input type="file" id="profile-image">
 
-    <button id="submit">Generate Resume</button>
-  </div>
-</form>
+      <button id="submit">Generate Resume</button>
+    </div>
+  </form>
 
-<script>
-  document.getElementById("submit").addEventListener("click", function (event) {
-    event.preventDefault();
+  <script>
+    document.getElementById("submit").addEventListener("click", function (event) {
+      event.preventDefault();
 
-    // Personal Information
-    const name = document.getElementById("name").value;
-    const jobTitle = document.getElementById("job-title").value;
-    const about = document.getElementById("about").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
+      // Personal Information
+      const name = document.getElementById("name").value;
+      const jobTitle = document.getElementById("job-title").value;
+      const about = document.getElementById("about").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
 
-    // Education
-    const degree = document.getElementById("degree").value;
-    const institution = document.getElementById("institution").value;
-    const year = document.getElementById("year").value;
+      // Education
+      const degree = document.getElementById("degree").value;
+      const institution = document.getElementById("institution").value;
+      const year = document.getElementById("year").value;
 
-    // Work Experience
-    const company = document.getElementById("company").value;
-    const yearsWorked = document.getElementById("years-worked").value;
+      // Work Experience
+      const company = document.getElementById("company").value;
+      const yearsWorked = document.getElementById("years-worked").value;
 
-    // Skills
-    const skill1 = document.getElementById("skill-1").value;
-    const skill2 = document.getElementById("skill-2").value;
-    const skill3 = document.getElementById("skill-3").value;
+      // Skills
+      const skill1 = document.getElementById("skill-1").value;
+      const skill2 = document.getElementById("skill-2").value;
+      const skill3 = document.getElementById("skill-3").value;
 
-    // Validate input fields (make sure none of them are empty)
-    if (!name || !jobTitle || !about || !email || !phone || !degree || !institution || !year || !company || !yearsWorked || !skill1 || !skill2 || !skill3) {
-      alert("Please fill in all the fields.");
-      return; // Stop the function if validation fails
-    }
+      // Handle profile image upload and convert to base64
+      const profileImage = document.getElementById("profile-image").files[0];
+      if (profileImage) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const profileImageBase64 = e.target.result;
 
-    // Handle profile image upload and convert to base64
-    const profileImage = document.getElementById("profile-image").files[0];
-    let profileImageBase64 = '';
-    if (profileImage) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        profileImageBase64 = e.target.result;
+          // Store data in localStorage
+          localStorage.setItem("resumeData", JSON.stringify({
+            name,
+            jobTitle,
+            about,
+            email,
+            phone,
+            degree,
+            institution,
+            year,
+            company,
+            yearsWorked,
+            skill1,
+            skill2,
+            skill3,
+            profileImage: profileImageBase64
+          }));
 
-        // Create a query string to pass data to the new page
-        const resumeData = new URLSearchParams({
+          // Open the resume page without displaying data in the URL
+          window.open('resume-generate.html', '_blank');
+        };
+        reader.readAsDataURL(profileImage);
+      } else {
+        // Store data in localStorage without image
+        localStorage.setItem("resumeData", JSON.stringify({
           name,
           jobTitle,
           about,
@@ -165,37 +180,13 @@
           yearsWorked,
           skill1,
           skill2,
-          skill3,
-          profileImage: profileImageBase64
-        }).toString();
+          skill3
+        }));
 
-        // Open the resume page with the query string
-        window.open('resume-generate.html?' + resumeData, '_blank');
-      };
-      reader.readAsDataURL(profileImage);
-    } else {
-      // In case no image is selected, continue with the rest of the data
-      const resumeData = new URLSearchParams({
-        name,
-        jobTitle,
-        about,
-        email,
-        phone,
-        degree,
-        institution,
-        year,
-        company,
-        yearsWorked,
-        skill1,
-        skill2,
-        skill3
-      }).toString();
-
-      // Open the resume page with the query string
-      window.open('resume-generate.html?' + resumeData, '_blank');
-    }
-  });
-</script>
-
+        // Open the resume page without displaying data in the URL
+        window.open('resume-generate.html', '_blank');
+      }
+    });
+  </script>
 </body>
 </html>

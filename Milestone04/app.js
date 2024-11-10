@@ -1,3 +1,4 @@
+// Wait for the DOM to be fully loaded before attaching event listeners
 document.addEventListener("DOMContentLoaded", function () {
     // Add an event listener to the form submit button
     var submitButton = document.getElementById("submit");
@@ -57,21 +58,12 @@ function generateResume(event) {
     // Handle profile image display
     var profileImage = (_a = document.getElementById("profile-image").files) === null || _a === void 0 ? void 0 : _a[0];
     var displayImage = document.getElementById("display-image");
-    // Only proceed if an image file is selected
     if (profileImage) {
         var reader = new FileReader();
         reader.onload = function (e) {
             displayImage.src = e.target.result;
         };
-        reader.onerror = function () {
-            console.error("Error reading file.");
-            alert("There was an error loading the image.");
-        };
         reader.readAsDataURL(profileImage);
-    }
-    else {
-        // If no image was selected, show a default image or keep it empty
-        displayImage.src = ""; // Optionally, you can set a default placeholder here
     }
     // Show the resume display section
     document.getElementById("resume-display").classList.remove("hidden");
