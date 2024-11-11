@@ -136,7 +136,7 @@
     <button class="save-btn" id="saveButton" style="display: none;">Save</button>
 
     <div class="action-buttons">
-      <button class="pdf-btn" onclick="downloadPDF()">Download as PDF</button>
+      <button class="pdf-btn" id="downloadPDF" onclick="downloadPDF()">Download as PDF</button>
       <button class="live-url-btn" onclick="generateLiveURL()">Generate Live URL</button>
     </div>
 
@@ -145,6 +145,9 @@
     </p>
     <button class="copy-btn" id="copyButton" style="display:none;" onclick="copyToClipboard()">Copy Live URL</button>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
   <script>
     const resumeData = JSON.parse(localStorage.getItem("resumeData")) || {};
@@ -192,31 +195,33 @@
       loadData();
       document.getElementById("saveButton").style.display = "none";
       document.getElementById("editButton").style.display = "block";
+      document.querySelectorAll("span").forEach(el => el.style.display = "inline");
+      document.querySelectorAll("input").forEach(el => el.style.display = "none");
     });
 
     function downloadPDF() {
       const element = document.getElementById("resume");
-      html2pdf().from(element).save("resume.pdf");
+      const opt = {
+        margin: 0.5,
+        filename: 'Generated_Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
     }
 
     function generateLiveURL() {
-      // Create a unique URL based on the resume data
-      const uniqueID = 'resume-' + Date.now();
-      const url = window.location.href.split('?')[0] + "?resume=" + uniqueID;
-      resumeData.liveURL = url;
-      localStorage.setItem("resumeData", JSON.stringify(resumeData));
-
-      // Display the URL
-      const liveURLLink = document.getElementById("liveURLLink");
-      liveURLLink.href = url;
-      liveURLLink.innerText = url;
+      const liveURL = window.location.href;
+      document.getElementById("liveURLLink").href = liveURL;
+      document.getElementById("liveURLLink").innerText = liveURL;
       document.getElementById("displayURL").style.display = "block";
       document.getElementById("copyButton").style.display = "block";
     }
 
     function copyToClipboard() {
-      const url = document.getElementById("liveURLLink").innerText;
-      navigator.clipboard.writeText(url).then(() => {
+      const copyText = document.getElementById("liveURLLink").href;
+      navigator.clipboard.writeText(copyText).then(() => {
         alert("Live URL copied to clipboard!");
       });
     }
